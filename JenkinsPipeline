@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    stages{
+        stage('clone the repo')
+        {
+            steps{
+                git branch: 'main', url: 'https://github.com/toni31416/Course_Devops_CICD_AnsibleJenkins.git'
+            }
+        }
+        
+        stage('run playbook1')
+        {
+            steps{
+                ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'myansible', inventory: 'inventory.ini', playbook: 'Playbook_Install.yml'
+            }
+        }
+        
+}
